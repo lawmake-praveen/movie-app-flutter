@@ -50,12 +50,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Movie App',
-      theme: ThemeData(useMaterial3: true),
-      home: Scaffold(
-        body: pages[_currentIndex],
-        bottomNavigationBar: CustomBottomNavbar(
-            tabChange: (index) => navigateBottomBar(index),
-            currentIndex: _currentIndex),
+      home: SafeArea(
+        child: Scaffold(
+          body: pages[_currentIndex],
+          bottomNavigationBar: CustomBottomNavbar(
+              tabChange: (index) => navigateBottomBar(index),
+              currentIndex: _currentIndex),
+        ),
       ),
       debugShowCheckedModeBanner: false,
     );

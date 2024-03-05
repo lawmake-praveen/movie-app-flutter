@@ -9,6 +9,7 @@ class ColorGet {
 
   static const Color text1 = Color(0xFF000000);
   static const Color text2 = Color(0xFFFFFFFF);
+  static const Color text3 = Color(0xFF959595);
 
   static const Color bg1 = Color(0xFF000000);
   static const Color bg2 = Color(0xFFFFFFFF);

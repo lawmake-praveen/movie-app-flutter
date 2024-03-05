@@ -9,11 +9,13 @@ class CustomMovieSlider extends StatelessWidget {
   final data;
   final String title;
   final String targetContent;
+  final double left;
   const CustomMovieSlider(
       {super.key,
       this.data,
       required this.title,
-      this.targetContent = 'poster_path'});
+      this.targetContent = 'poster_path',
+      this.left = 20});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class CustomMovieSlider extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(left: 20),
+          margin: EdgeInsets.only(left: left),
           child: CustomText(
             text: title,
             size: 24,
@@ -44,49 +46,36 @@ class CustomMovieSlider extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                            "https://image.tmdb.org/t/p/w200${movie[targetContent]}",
-                            width: 150),
+                          "https://image.tmdb.org/t/p/w200${movie[targetContent]}",
+                          width: 150,
+                          errorBuilder: (context, error, stackTrace) {
+                            return SizedBox(
+                              width: 150,
+                              height: 192,
+                              child: Icon(
+                                Icons.local_movies_outlined,
+                                size: 120,
+                                color: ColorGet.icon2,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 4,
                       ),
                       CustomText(
                         text: movie['title'],
-                        color: ColorGet.text2,maxLines: 2,
+                        color: ColorGet.text2,
+                        maxLines: 2,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 14,
                       )
                     ]),
               );
             },
             options: CarouselOptions(viewportFraction: 0.4, height: 300)),
-
-        // Container(
-        //   height: 400,
-        //   child: ListView.builder(
-        //     shrinkWrap: true,
-        //     scrollDirection: Axis.horizontal,
-        //     itemCount: data['results'].length,
-        //     itemBuilder: (context, index) {
-        //       var movie = data['results'][index];
-        //       return Container(
-        //         margin: EdgeInsets.only(left: 0, right: 10),
-        //         child: Column(
-        //             crossAxisAlignment: CrossAxisAlignment.start,
-        //             children: [
-        //               ClipRRect(
-        //                 borderRadius: BorderRadius.circular(8),
-        //                 child: Image.network(
-        //                     "https://image.tmdb.org/t/p/w200${movie[targetContent]}",
-        //                     width: 150),
-        //               ),
-        //               CustomText(text: movie['title'], color: ColorGet.text2,),
-        //               SizedBox(
-        //                 height: 20,
-        //               )
-        //             ]),
-        //       );
-        //     },
-        //   ),
-        // ),
       ],
     );
   }

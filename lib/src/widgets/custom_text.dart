@@ -7,13 +7,15 @@ class CustomText extends StatelessWidget {
   final Color color;
   final FontWeight weight;
   final int maxLines;
+  final TextAlign? textAlign;
   const CustomText(
       {super.key,
       required this.text,
       this.size = 16,
       this.weight = FontWeight.w500,
-      this.color = ColorGet.text1,
-      this.maxLines = 2});
+      this.color = ColorGet.text2,
+      this.maxLines = 2,
+      this.textAlign});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class CustomText extends StatelessWidget {
       text,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
+      textAlign: textAlign,
       style: TextStyle(
         color: color,
         fontSize: size,
